@@ -1,0 +1,107 @@
+body {
+  background-color: black;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative; /* so that it does not ignore z-coords */
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: white;
+}
+
+.slideshow {
+  position: fixed;
+
+  /* Take up entire page */
+  width: 100%;
+  height: 100%;
+
+  /* Position at top left (0, 0) */
+  top: 0;
+  left: 0;
+
+  z-index: 0; /* Makes sure slideshow images are behind the other content */
+  list-style: none; /* Removes bullet points */
+  margin: 0;
+  padding: 0;
+}
+
+/* Styling for individual list items */
+.slideshow li {
+  /* Take up entire page */
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  /* Position at top left (0, 0) */
+  top: 0;
+  left: 0;
+
+  background-size: cover;
+
+  background-position: 50% 50%; /* centres images */
+
+  background-repeat: no-repeat; /* so images dont repeat vertically or horizontally */
+
+  opacity: 0; /* start images faded out */
+  z-index: 0; /* Makes sure slideshow images are behind the other content */
+  animation: imageAnimation 50s linear infinite;
+}
+
+.slideshow li:nth-child(1) {
+  background-image: url(https://i.imgur.com/AZeo19W.jpg);
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.slideshow li:nth-child(2) {
+  background-image: url(../images/landing_image2.jpg);
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url(../images/landing_image3.jpg);
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url(../images/landing_image4.jpg);
+  animation-delay: 30s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url(../images/landing_image5.jpg);
+  animation-delay: 40s;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+  opacity: 1;
+}
