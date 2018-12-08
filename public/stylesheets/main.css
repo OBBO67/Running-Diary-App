@@ -5,3 +5,8 @@
 .signupForm {
   padding-left: 1vw;
 }
+
+.btn {
+  opacity: 0.75;
+  border-style: solid;
+}

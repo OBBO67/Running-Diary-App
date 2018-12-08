@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const User = require("../models/user");
 
 // Landing Page
@@ -26,11 +27,25 @@ router.post("/register", (req, res) => {
     (err, user) => {
       if (err) {
         console.log(`Error registering user: ${err}`);
+        req.flash("error", err.message);
         return res.redirect("/register");
       }
-      res.redirect("/profiles"); // ok for now will change to setup profile page
+      passport.authenticate("local")(req, res, () => {
+        req.flash("success", `Welcome to The Running Diary ${user.username}`);
+        res.redirect("/profiles"); // ok for now will change to setup profile page
+      });
     }
   );
 });
+
+// handle login logic, use autheticate as the middleware
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/profiles",
+    failureRedirect: "/login"
+  }),
+  (req, res) => {}
+);
 
 module.exports = router;

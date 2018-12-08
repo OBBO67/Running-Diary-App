@@ -6,6 +6,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const User = require("./models/user");
+const flash = require("connect-flash");
 
 // require routes
 const indexRoutes = require("./routes/index");
@@ -21,12 +22,14 @@ mongoose.connect("mongodb://localhost/running_app");
 
 // app configuration
 app.set("view engine", "ejs");
+// get info from html forms, extended so nested objects can be posted
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
 app.use(methodOverride("_method"));
+// flash messages
+app.use(flash());
 
 // --- configure passport ---
-
 // give http some state
 app.use(
   require("express-session")({
@@ -37,16 +40,24 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new localStrategy(User.authenticate()));
+app.use(passport.session()); // persistent login sessions
+passport.use(new localStrategy(User.authenticate())); // define local strategy
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // --- end of passport configuration ---
 
+// middleware to be used on every route
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
+
 // routes
 app.use("/", indexRoutes);
-app.use("/", profileRoutes);
+app.use("/profiles", profileRoutes);
 
 app.listen("1000", () => {
   console.log("Server running on port 1000");
