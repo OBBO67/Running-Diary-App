@@ -3,17 +3,17 @@
 <div class="container">
   <div class="row">
     <h1 style="text-align: center">Create Your Profile</h1>
-
     <div style="width: 30%; margin: 25px auto">
-      <form action="/profiles" method="POST">
+      <form action="/profiles" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <input class="form-control" type="text" name="profiles[name]" placeholder="name" required>
+          <input class="form-control" type="text" name="profile[name]" placeholder="name" required>
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="profiles[bio]" placeholder="tell us about your goals..."></textarea>
+          <textarea class="form-control" name="profile[bio]" placeholder="tell us about your goals..."></textarea>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="profiles[profileImage]" placeholder="profile picture">
+          <label for="profileImg">Image</label>
+          <input class="form-control" type="file" id="image" name="profileImg" accept="image/*">
         </div>
         <div class="form-group">
           <h4>Personal Bests</h4>
@@ -22,13 +22,28 @@
               Distance
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">1 mile</a>
-              <a class="dropdown-item" href="#">5km</a>
-              <a class="dropdown-item" href="#">10km</a>
-              <a class="dropdown-item" href="#">Half Marathon</a>
-              <a class="dropdown-item" href="#">Marathon</a>
+              <a class="dropdown-item" id="mile" href="#">1 mile</a>
+              <a class="dropdown-item" id="fivek" href="#">5km</a>
+              <a class="dropdown-item" id="tenk" href="#">10km</a>
+              <a class="dropdown-item" id="halfm" href="#">Half Marathon</a>
+              <a class="dropdown-item" id="fullm" href="#">Marathon</a>
             </div>
           </div>
+        </div>
+        <div class="form-group">
+          <label for="raceTime">Race Time: </label>
+          <input id="raceTime" type="time" name="raceTime" step="2">
+          <button type="button" id="timeButton" class="btn btn-outline-dark">Add</button>
+        </div>
+        <div class="form-group">
+          <table class="table table-striped table-dark" name="profile[personalBests]">
+            <thead>
+              <tr>
+                <th scope="col">Distance</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+          </table>
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block">Submit</button>
@@ -38,5 +53,5 @@
   </div>
 </div>
 
-<script src="create_profile.js"></script>
+<script type="text/javascript" src="/scripts/create_profile.js"></script>
 <% include ../partials/footer %>

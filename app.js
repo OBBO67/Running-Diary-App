@@ -7,6 +7,7 @@ const localStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const User = require("./models/user");
 const flash = require("connect-flash");
+require("dotenv").config();
 
 // require routes
 const indexRoutes = require("./routes/index");
@@ -59,6 +60,6 @@ app.use((req, res, next) => {
 app.use("/", indexRoutes);
 app.use("/profiles", profileRoutes);
 
-app.listen("1000", () => {
-  console.log("Server running on port 1000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
