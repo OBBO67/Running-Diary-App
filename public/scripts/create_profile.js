@@ -43,11 +43,13 @@ function createTableCell(column) {
     let tableRow = document.createElement("tr");
     pbTable.appendChild(tableRow); // add row to table
     let tableCell = document.createElement("td"); // create cell
+    tableCell.setAttribute("name", "distance");
     let textNode = document.createTextNode(this.text); // create the text node for the distance
     tableCell.appendChild(textNode); // add selected distance to the cell as its text
     tableRow.appendChild(tableCell); // add the cell to the table row
   } else {
     let tableCell = document.createElement("td"); // create cell
+    tableCell.setAttribute("name", "time");
     let textNode = document.createTextNode(raceTime.value); // create the text node for the distance
     tableCell.appendChild(textNode); // add selected distance to the cell as its text
     let lastRow = pbTable.rows[pbTable.rows.length - 1];

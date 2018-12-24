@@ -57,13 +57,13 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 router.get("/:id", (req, res) => {
   // find the profile with the given id
   Profile.findOne({ _id: req.params.id }, (err, foundProfile) => {
-    if (err) {
+    if (err || !foundProfile) {
       console.log(`Error finding profile: ${err}`);
       req.flash("error", "Could not find profile");
       res.redirect("back");
     } else {
       console.log(`Profile found: ${foundProfile}`);
-      res.send("showpage");
+      res.render("profiles/show", { profile: foundProfile });
     }
   });
 });
@@ -83,6 +83,19 @@ router.post(
         id: req.user._id,
         username: req.user.username
       };
+      // let reqData = [];
+      // req
+      //   .on("data", chunk => {
+      //     reqData.push(chunk);
+      //   })
+      //   .on("end", () => {
+      //     reqData = Buffer.concat(reqData).toString();
+      //   });
+
+      // reqData.forEach(data => {
+      //   console.log(`request data: ${data}`);
+      // });
+
       // Create the profile in the database using the profile obj from the form
       Profile.create(req.body.profile, (err, profile) => {
         // if there is an error redirect back
@@ -92,6 +105,10 @@ router.post(
           req.flash("error", err.message);
           return res.redirect("back");
         }
+        let pb = req.body.profile.personalBests;
+        let distance = req.body.distance;
+        let time = req.body.time;
+        console.log(`body data: ${pb}, ${distance}, ${time}`);
         res.redirect(`/profiles/${profile.id}`);
       });
     });

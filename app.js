@@ -25,6 +25,7 @@ mongoose.connect("mongodb://localhost/running_app");
 app.set("view engine", "ejs");
 // get info from html forms, extended so nested objects can be posted
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/public`));
 app.use(methodOverride("_method"));
 // flash messages

@@ -14,3 +14,27 @@
 /* #raceTime {
   display: inline;
 } */
+
+/* .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+
+#username {
+  color: #85e085;
+}
+
+#profile-img img {
+  width: 128px;
+  margin: 10px;
+  border: 5px solid 85e85;
+  border-radius: 500px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+}
+
+#bio {
+  border: 5px solid #85e085;
+}

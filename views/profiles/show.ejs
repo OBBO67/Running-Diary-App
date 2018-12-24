@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div id="username">
+    <h3><%= profile.name %></h3>
+  </div>
+  <div id="profile-img">
+    <img src="<%= profile.profilePic %>">
+  </div>
+  <div id="bio">
+    <p><%= profile.bio %></p>
+  </div>
+</div>
+
+<% include ../partials/footer %>
