@@ -93,7 +93,7 @@ router.post(
       //   });
 
       // reqData.forEach(data => {
-      //   console.log(`request data: ${data}`);
+      //   console.log("request data: " + data + "\n");
       // });
 
       // Create the profile in the database using the profile obj from the form
@@ -105,6 +105,8 @@ router.post(
           req.flash("error", err.message);
           return res.redirect("back");
         }
+        console.log(req.body);
+        // console.log(res.json(req.body));
         let pb = req.body.profile.personalBests;
         let distance = req.body.distance;
         let time = req.body.time;

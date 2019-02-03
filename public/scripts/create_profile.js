@@ -47,6 +47,7 @@ function createTableCell(column) {
     let textNode = document.createTextNode(this.text); // create the text node for the distance
     tableCell.appendChild(textNode); // add selected distance to the cell as its text
     tableRow.appendChild(tableCell); // add the cell to the table row
+    tableRow.setAttribute("name", "racePB");
   } else {
     let tableCell = document.createElement("td"); // create cell
     tableCell.setAttribute("name", "time");
